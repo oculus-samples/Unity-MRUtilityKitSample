@@ -1,9 +1,9 @@
 {
   "dependencies": {
-    "com.meta.xr.mrutilitykit": "207.0.0",
-    "com.meta.xr.sdk.core": "207.0.0",
-    "com.meta.xr.sdk.interaction": "207.0.0",
-    "com.meta.xr.sdk.interaction.ovr": "207.0.0",
+    "com.meta.xr.mrutilitykit": "209.0.0",
+    "com.meta.xr.sdk.core": "209.0.0",
+    "com.meta.xr.sdk.interaction": "209.0.0",
+    "com.meta.xr.sdk.interaction.ovr": "209.0.0",
     "com.unity.collab-proxy": "2.11.2",
     "com.unity.feature.development": "1.0.2",
     "com.unity.multiplayer.center": "1.0.0",

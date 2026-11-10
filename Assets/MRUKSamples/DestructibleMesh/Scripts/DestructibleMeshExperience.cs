@@ -55,7 +55,15 @@ namespace Meta.XR.MRUtilityKitSamples.DestructibleMesh
                 HandInputManager.Instance.SwipeForwardDown)
             {
                 GlobalMeshSanityCheck();
-                destructibleGlobalMeshSpawner.AddDestructibleGlobalMesh(MRUK.Instance.GetCurrentRoom());
+                var currentRoom = MRUK.Instance != null ? MRUK.Instance.GetCurrentRoom() : null;
+                // A destructible mesh is spawned automatically on scene load for the current
+                // room (DestructibleGlobalMeshSpawner.CreateOnRoomLoaded). Only add one if the
+                // room does not already have it, otherwise AddDestructibleGlobalMesh throws.
+                if (currentRoom != null &&
+                    !destructibleGlobalMeshSpawner.TryGetDestructibleMeshForRoom(currentRoom, out _))
+                {
+                    destructibleGlobalMeshSpawner.AddDestructibleGlobalMesh(currentRoom);
+                }
             }
 
             if (OVRInput.GetDown(OVRInput.Button.Two) ||
@@ -85,28 +93,16 @@ namespace Meta.XR.MRUtilityKitSamples.DestructibleMesh
 
         private void GlobalMeshSanityCheck()
         {
-            if (OVRPlugin.GetSystemHeadsetType() == OVRPlugin.SystemHeadset.Meta_Quest_3 ||
-                OVRPlugin.GetSystemHeadsetType() == OVRPlugin.SystemHeadset.Meta_Quest_3S ||
-                OVRPlugin.GetSystemHeadsetType() == OVRPlugin.SystemHeadset.Meta_Link_Quest_3S ||
-                OVRPlugin.GetSystemHeadsetType() == OVRPlugin.SystemHeadset.Meta_Link_Quest_3)
-            {
-                if (MRUK.Instance != null && MRUK.Instance.GetCurrentRoom() != null &&
-                    MRUK.Instance.GetCurrentRoom().GlobalMeshAnchor == null)
-                {
-                    ExceptionUI.SetActive(true);
-                    ExceptionMessage.text =
-                        "No Global Mesh was found for the current room. Make sure to have correctly set up the space through a room capture.";
-                }
-                else
-                {
-                    ExceptionUI.SetActive(false);
-                }
-            }
-            else
+            if (MRUK.Instance != null && MRUK.Instance.GetCurrentRoom() != null &&
+                MRUK.Instance.GetCurrentRoom().GlobalMeshAnchor == null)
             {
                 ExceptionUI.SetActive(true);
                 ExceptionMessage.text =
-                    "Destructible meshes are only supported on Quest 3 and Quest 3S devices.";
+                    "No Global Mesh was found for the current room. Make sure to have correctly set up the space through a room capture.";
+            }
+            else
+            {
+                ExceptionUI.SetActive(false);
             }
         }
 

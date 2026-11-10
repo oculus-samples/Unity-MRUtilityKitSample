@@ -13,7 +13,7 @@ using UnityEngine.UI;
 namespace Meta.XR.MRUtilityKitSamples.StartScene
 {
     [MetaCodeSample("MRUKSample-StartScene")]
-    public class MenuUIBuilder : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+    public class MenuUIBuilder : MonoBehaviour
     {
         /// <summary>The spacing between UI elements in pixels.</summary>
         public float ElementSpacing = 16.0f;
@@ -250,18 +250,6 @@ namespace Meta.XR.MRUtilityKitSamples.StartScene
                     _cameraRig.centerEyeAnchor.transform.forward * SpawnDistanceFromCamera,
                     Time.deltaTime * _followSpeed);
             }
-        }
-
-        /// <summary>Called when the pointer enters the UI element.</summary>
-        public void OnPointerEnter(PointerEventData eventData)
-        {
-            Cursor.gameObject.SetActive(true);
-        }
-
-        /// <summary>Called when the pointer exits the UI element.</summary>
-        public void OnPointerExit(PointerEventData eventData)
-        {
-            Cursor.gameObject.SetActive(false);
         }
     }
 }

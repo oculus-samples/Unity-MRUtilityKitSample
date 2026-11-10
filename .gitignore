@@ -88,6 +88,11 @@ crashlytics-build.properties
 # Unity Package Manager lock file
 packages-lock.json
 
+#
+# Added by Meta's ImmersiveDebugger, can contain machine-specific data:
+Assets/Resources/DevAgentSettings.asset
+Assets/Resources/DevAgentSettings.asset.meta
+
 # Meta Quest agentic tooling: keep VS Code/Cursor workspace recommendations
 !.vscode/extensions.json
 !.vscode/mcp.json
